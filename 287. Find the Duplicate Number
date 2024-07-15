@@ -1,0 +1,48 @@
+class Solution {
+public:
+    int findDuplicate(vector<int>& nums) {
+        // brute forcee -- using two loops - tc n^2 sc o(1)
+        // approach - 1 : sort the array and compare - tc nlogn
+
+        // approach - 2 : using hashing / inserting in a set 
+        // vector<int>hash(nums.size() + 1 , 0);
+
+        //     for(auto num : nums){
+        //         hash[num]++;
+        //         if(hash[num] > 1)return num;
+        //     }
+        // return 0;
+
+
+
+        // new approaches i learned : 
+
+
+        // marking as visited ( amazing thinking behind it ) -- 
+        // so we have exactly one repeated element and all element are in the ranze 1 to n and array size is n+1 means the max index in the array is n , so if we start visiting the elements and consider it as index and then visit that index and mark it as -ve , then we will come at an index twice , and that index will be the repeated one . very very good thingking
+
+        // int ind ; 
+
+        // for(int n : nums){
+        //     ind = abs(n);
+        //     if(nums[ind] < 0){
+        //         return ind;
+        //     }
+        //     else{
+        //         nums[ind] *= -1;
+        //     }
+        // }
+
+        // return 0;
+
+        
+
+
+        // next approach - index sort 
+        // there are n + 1 elements but range from 1 to n , so exactly one element is repeated , now if we sort all elements then one element will replace the right element from it's position , this is what we gonna use 
+
+        
+
+        
+    }
+};
