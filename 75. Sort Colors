@@ -1,0 +1,28 @@
+class Solution {
+public:
+    void sortColors(vector<int>& nums) {
+        // approach 1 - counting sort , since we have only 3 elements 
+
+        // approach 2 - using two pointers and swapping values 
+        int i = 0 ; 
+        int j = nums.size()-1;
+        int k = 0;
+
+        while(k <= j){
+            if(nums[i] == 0){
+                i++;
+                k = max(k,i);
+            }
+            else if(nums[j] == 2)j--;
+            else if(nums[k] == 2 ){
+                swap(nums[k], nums[j]);
+                j--;
+            }
+            else if(nums[k] == 0){
+                swap(nums[k], nums[i]);
+                i++;
+            }
+            else k++;
+        }
+    }
+};
