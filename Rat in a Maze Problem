@@ -1,0 +1,67 @@
+class Solution {
+  public:
+    vector<string> ans;
+    
+    
+    void dfs(int i , int j , string& path ,vector<vector<int>> &mat , vector<vector<bool>>& visit){
+        // cout<<"at node "<<i <<"-"<<j<<"       curr path : "<<path<<endl;
+        
+        // base case : 
+        if(i == mat.size()-1 && j == mat.size()-1){
+            // reached hoome ; 
+            ans.push_back(path);
+            path.pop_back();
+            visit[i][j] = false;
+            return;
+        }
+        
+        // now we have four directions ; 
+        
+        // going right : 
+        if(j + 1 < mat[0].size() && mat[i][j+1] && !visit[i][j+1]){
+            path += "R"; 
+            visit[i][j+1] = true;
+            dfs(i, j+1 , path,mat,visit);
+        }
+        
+        // going down : 
+        if(i + 1 <mat.size() && mat[i+1][j] && !visit[i+1][j]){
+            path+= "D";
+            visit[i+1][j] = true;
+            dfs(i+1 , j ,path,mat,visit);
+        }
+        
+        // going left: 
+        if(j-1 >= 0 && mat[i][j-1] && !visit[i][j-1]){
+            path += "L";
+            visit[i][j-1] = true;
+            dfs(i, j-1, path , mat , visit);
+        }
+        
+        // going up : 
+        if(i-1 >= 0 && mat[i-1][j] && !visit[i-1][j]){
+            path += "U";
+            visit[i-1][j] = true;
+            dfs(i-1, j , path , mat ,visit);
+        }
+        
+        // we checked all directions and now we are returning back;
+        visit[i][j] = false;
+        path.pop_back();
+        return;
+        
+        
+    }
+    
+    vector<string> findPath(vector<vector<int>> &mat) {
+        if(mat[0][0] == 0)return ans; // base case 
+        
+        string path = "";
+        vector<vector<bool>>visit(mat.size(), vector<bool>(mat[0].size(),false));
+       
+        visit[0][0] = true;
+        dfs(0,0, path, mat, visit);
+        
+        return ans;
+    }
+};
