@@ -1,0 +1,40 @@
+class Solution
+{
+    private:
+    Node* reverse(Node* curr , Node* prev){
+        // base case : 
+        if(curr == NULL)return prev;
+        
+        // processing :
+        Node* temp = curr->next;
+        curr->next = prev;
+        
+        // recursive call : 
+        return reverse(temp, curr);
+    }
+    
+    public:
+    Node *compute(Node *head)
+    {
+        // we have to reverse the LL 
+        // then make it in inc order 
+        // then again reverse it : 
+        
+        Node* revhead = reverse(head, NULL);
+        
+        Node* temp = revhead;
+        
+        while(temp->next != NULL){
+            if(temp->next->data < temp->data){
+                temp->next = temp->next->next;
+            }
+            else{
+                temp = temp->next;
+            }
+        }
+        
+        
+        return reverse(revhead, NULL);
+    }
+    
+};
